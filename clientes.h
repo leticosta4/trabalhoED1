@@ -1,4 +1,3 @@
-#include "arvore.h"
 #include "destinos.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,8 +9,9 @@ void clienteTipo1();
 
 void paginaInicial(){
   int opcao = 0;
+  Pais paises;
   printf("Bem vindo à Viagens ED1!\n\n");
-  printf("Digite a opção desejada\n1 - Já sei para onde quero viajar\n2 - Não sei para onde quero viajar (SUGESTÕES)\n3 - Exibir lista geral de países e sítios turísticos\n4 - Ver meu cadastro\n5 - Listar países e sítios turísticos escolhidos sem  auxílio\n6 - Listar países e sítios turísticos escolhidos por  auxílio\n7 - Listar países e sítios turísticos não visitados\n 8 - Sair\n");
+  printf("Digite a opção desejada\n1 - Já sei para onde quero viajar\n2 - Não sei para onde quero viajar (SUGESTÕES)\n3 - Exibir lista geral de países e sítios turísticos\n4 - Ver meu cadastro\n5 - Listar países e sítios turísticos escolhidos sem  auxílio\n6 - Listar países e sítios turísticos escolhidos por  auxílio\n7 - Listar países e sítios turísticos não visitados\n8 - Sair\n");
   scanf("%d", &opcao);
   getchar();
   system("clear");
@@ -29,13 +29,9 @@ void paginaInicial(){
       //chamr alguma função com o cadastro
       break;
     case 5:
-
-      break;
     case 6:
-
-      break;
     case 7:
-
+      listasEspecificas(paises, opcao);
       break;
     case 8:
       exit(1);
