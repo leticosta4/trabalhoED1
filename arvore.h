@@ -13,8 +13,6 @@ Arvore* inserir(Arvore *, int, char *);
 void emOrdem(Arvore *);
 void preOrdem(Arvore *);
 void posOrdem(Arvore *);
-//Arvore* retirar(Arvore *, int);
-//Arvore* substitui(Arvore *, Arvore *);
 //int busca(Arvore*, int);
 
 Arvore* inserir(Arvore *raiz, int n, char *l){
@@ -59,45 +57,6 @@ void preOrdem(Arvore *raiz){
 
 }
 /*
-Arvore* retirar(Arvore *raiz, int n){
-  Arvore* aux;
-
-  if(raiz->prioridade < n) raiz->nao = retirar(raiz->nao,n);
-   else
-    if(raiz->prioridade > n) raiz->sim = retirar(raiz->sim,n);
-      else
-        if(raiz->nao == NULL){
-          aux = raiz;
-          raiz = raiz->sim;
-          free(aux);
-        }
-        else
-          if(raiz->sim == NULL){
-            aux = raiz;
-            raiz = raiz->nao;
-            free(aux);
-          }
-
-          else raiz->sim = substitui(raiz, raiz->sim);
-
-  return raiz;
-}
-
-
-Arvore* substitui(Arvore* raiz, Arvore* antecessor){
-  Arvore* aux;
-
-  if(antecessor->nao == NULL){
-    aux = antecessor;
-    raiz->prioridade = antecessor->num;
-    antecessor = antecessor->sim;
-    free(aux);
-  }
-  else antecessor->nao = substitui(raiz, antecessor->nao);
-
-  return antecessor;
-}
-
 int busca(Arvore *raiz, int n){
   if(raiz == NULL) return 0;
 
