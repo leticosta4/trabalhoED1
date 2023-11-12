@@ -3,7 +3,7 @@
 #include <string.h>
 
 typedef struct sitioturistico {
-  struct sitioturistico *next;
+  struct sitioturistico *prox;
   char nomeSitio[50];
   int turista1, turista2;
 } Sitio;
@@ -17,9 +17,6 @@ typedef struct pais {
 
 Pais *inserirLista(Pais *paises, char *local);
 void listasEspecificas(Pais *paises, int op);
-
-/*void listarPorAuxilio(Pais *paises);
-void listarSemAuxilio(Pais *paises);*/
 
 Pais *inserirLista(Pais *paises, char *local) {
   Pais *novo;
@@ -63,23 +60,3 @@ void listasEspecificas(Pais *paises, int op) {
     aux = aux->next;
   }
 }
-
-/*void listarPorAuxilio(Pais *paises){
-  Sitio *ajudado = paises -> local;
-  while((ajudado) != NULL){
-    if((ajudado -> turista2) > 0){
-      printf("%s", paises -> nomePais);
-    }
-    ajudado = ajudado -> next;
-  }
-}
-
-void listarSemAuxilio(Pais *paises){
-  Sitio *escolhido = paises -> local;
-    while((escolhido) != NULL){
-      if((escolhido -> turista1) > 0){
-        printf("%s", paises -> nomePais);
-      }
-      escolhido = escolhido -> next;
-    }
-}*/
