@@ -15,48 +15,62 @@ typedef struct pais {
   int prioridade, quantTuristas = 0;
 } Pais;
 
-Pais *inserirLista(Pais *paises, char *local);
-void listasEspecificas(Pais *paises, int op);
+Pais *inserirPaises(Pais *pais, char *local);
+Sitio *inserirCidade(Sitio *cidade, char *nome);
+void listasEspecificas(Pais *pais, int op);
 
-Pais *inserirLista(Pais *paises, char *local) {
+Pais *inserirPaises(Pais *pais, char *local) { 
   Pais *novo;
-  novo = (Pais *)malloc(sizeof(Pais));
-  if (novo == NULL) {
-    exit(1);
-  }
+  novo = (Pais*)malloc(sizeof(Pais));
+  if (novo == NULL) { exit(1); }
   strcpy(novo->nomePais, local);
-
-  // inseririndo em logica de pilha
-  if (paises == NULL) {
+  
+  if (pais == NULL) {
     novo->prox = NULL;
   } else {
-    novo->prox = paises;
+    novo->prox = pais;
   }
-  paises = novo;
+  pais = novo;
 
-  return (paises);
+  return (pais);
 }
 
-void listasEspecificas(Pais *paises, int op) {
-  Sitio *aux = paises->local;
+Sitio *inserirCidade(Sitio *cidade, char *nome) {
+  Sitio *novo;
+  novo = (Sitio*)malloc(sizeof(Sitio));
+  if (novo == NULL) { exit(1); }
+  strcpy(novo->nomeSitio, nome);
+
+  if (cidade == NULL) {
+    novo->prox = NULL;
+  } else {
+    novo->prox = cidade;
+  }
+  cidade = novo;
+
+  return (cidade);
+}
+
+void listasEspecificas(Pais *pais, int op) {
+  Sitio *aux = pais->local;
   while (aux != NULL) {
     switch (op) {
     case 5: // sem auxilio
       if ((aux->turista1) > 0) {
-        printf("%s", paises->nomePais);
+        printf("%s\n", pais->nomePais);
       }
       break;
     case 6: // com auxilio
       if ((aux->turista2) > 0) {
-        printf("%s", paises->nomePais);
+        printf("%s\n", pais->nomePais);
       }
       break;
     case 7: // nao visitado
       if ((aux->turista1 == 0) && (aux->turista2 == 0)) {
-        printf("%s", paises->nomePais);
+        printf("%s\n", pais->nomePais);
       }
       break;
     }
-    aux = aux->next;
+    aux = aux->prox;
   }
 }
