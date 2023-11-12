@@ -10,10 +10,8 @@ typedef struct arvore{
 
 
 Arvore* inserir(Arvore *, int, char *);
-void emOrdem(Arvore *);
-void preOrdem(Arvore *);
-void posOrdem(Arvore *);
 //int busca(Arvore*, int);
+void listarArvore(Arvore *);
 
 Arvore* inserir(Arvore *raiz, int n, char *l){
   if(raiz == NULL){
@@ -37,25 +35,6 @@ Arvore* inserir(Arvore *raiz, int n, char *l){
   return raiz;
   }
 
-void emOrdem(Arvore *raiz){
-  if(raiz == NULL) return;
-  emOrdem(raiz->sim);
-  printf("Prioridade: %d - Pergunta: %s\n", raiz->prioridade, raiz->pergunta);
-  emOrdem(raiz->nao);
-}
-
-void posOrdem(Arvore *raiz){
-  emOrdem(raiz->sim);
-  emOrdem(raiz->nao);
-  printf("%d", raiz->prioridade);
-}
-
-void preOrdem(Arvore *raiz){
-  printf("%d", raiz->prioridade);
-  emOrdem(raiz->sim);
-  emOrdem(raiz->nao);
-
-}
 /*
 int busca(Arvore *raiz, int n){
   if(raiz == NULL) return 0;
@@ -65,3 +44,10 @@ int busca(Arvore *raiz, int n){
   else busca(raiz->sim,n);
 }
 */
+
+void listarArvore(Arvore *raiz){ //esse que tem que usar
+  if(raiz == NULL) return;
+  printf("Prioridade: %d - Pergunta: %s\n", raiz->prioridade, raiz->pergunta);
+  listarArvore(raiz->sim);
+    listarArvore(raiz->nao);
+}
