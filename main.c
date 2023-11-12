@@ -1,15 +1,13 @@
-#include "arvore.h"
+#include "arvore.h" 
+#include "destinos.h"
+//tirar dps pq ja estao em clientes.h
 #include "clientes.h"
-//#include "destinos.h"
-//tirando o #include "destinos.h" pq o clientes.h já traz
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 void lerArquivo(FILE *arquivo, int qtd, Arvore **viagem);
-void lerArquivoLista(FILE *arquivo, int qtd, Pais **paises);
-
-/*O sistema da agênciadeverá:•Apresentar os menus de atendimento adequados;•Listar todos os países que foram visitados por clientes decididos;•Listar todos os paísese sítiosturísticosque foram visitados para clientes que usaram o sistema de auxílio;•Lista de países visitados em geral;•Lista de países não visitados;•Informar o paíse o sítiomais visitado pelos dois tipos de clientes*/
+void lerArquivoLista(FILE *arquivo, Pais **pais, Sitio **sitio);
 
 int main(void) {
   FILE *arquivo = NULL;
@@ -17,8 +15,9 @@ int main(void) {
   int qtd = 0;
 
   lerArquivo(arquivo, qtd, &viagem);
+  
   //chamar função da pagina inicial
-  emOrdem(viagem);
+  listarArvore(viagem);
   return 0;
 }
 
@@ -41,18 +40,22 @@ void lerArquivo(FILE *arquivo, int qtd, Arvore **viagem) {
   fclose(arquivo);
 }
 
-void lerArquivoLista(FILE *arquivo, int qtd, Pais **paises){
-  char local[50];
-  int prioridade = 0;
+void lerArquivoLista(FILE *arquivo, Pais **pais, Sitio **sitio) {
+  char nome[50];
+  int indice = 0;
 
-  arquivo = fopen("Paises.txt", "r+");
+  arquivo = fopen("Destinos.txt", "r+");
   if (arquivo == NULL) {
     printf("Erro, arquivo não aberto");
     return;
   }
-  for (int i = 0; i < 10; i++) {
-    fscanf(arquivo, " %[^\n]", local);
-    (paises) = inserirLista(*paises, local);
+  for (int i = 0; i < 14; i++) {
+    fscanf(arquivo, "%d, %[^\n]", &indice, nome);
+    if (indice == 1) {
+      (*pais) = inserirPaises(*pais, nome);
+    } else {
+      (*pais)->local = inserirCidade((*pais)->local, nome);
+    }
   }
   fclose(arquivo);
 }
