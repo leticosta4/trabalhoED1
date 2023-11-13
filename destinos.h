@@ -15,14 +15,14 @@ typedef struct pais {
   int prioridade, quantTuristas;
 } Pais;
 
-void listarLista(Pais *pais);
-Pais *inserirPaises(Pais *pais, char *local);
+void listarLista(Pais *paises);
+Pais *inserirPaises(Pais *paises, char *local);
 Sitio *inserirCidade(Sitio *cidade, char *nome);
 //void listasEspecificas(Pais *pais, int op); //so dps de turistas
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-Pais *inserirPaises(Pais *pais, char *local) {
+Pais *inserirPaises(Pais *paises, char *local) {
 
   Pais *novo;
 
@@ -34,14 +34,14 @@ Pais *inserirPaises(Pais *pais, char *local) {
 
   strcpy(novo->nomePais, local);
 
-  if (pais == NULL) {
+  if (paises == NULL) {
     novo->prox = NULL;
   } else {
-    novo->prox = pais;
+    novo->prox = paises;
   }
-  pais = novo;
+  paises = novo;
 
-  return (pais);
+  return (paises);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,11 +70,11 @@ Sitio *inserirCidade(Sitio *cidade, char *nome) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-void listarLista(Pais *pais) { //só p teste de debug
+void listarLista(Pais *paises) { //só p teste de debug
   Pais *aux = NULL;
   Sitio *city = NULL;
 
-  aux = pais;
+  aux = paises;
 
   while (aux != NULL) {
     printf("%s\n", aux->nomePais);
@@ -87,23 +87,23 @@ void listarLista(Pais *pais) { //só p teste de debug
   }
 }
 
-/*void listasEspecificas(Pais *pais, int op) {
-  Sitio *aux = pais->local;
+/*void listasEspecificas(Pais *paises, int op) {
+  Sitio *aux = paises->local;
   while (aux != NULL) {
     switch (op) {
     case 5: // sem auxilio
       if ((aux->turista1) > 0) {
-        printf("%s\n", pais->nomePais);
+        printf("%s\n", paises->nomePais);
       }
       break;
     case 6: // com auxilio
       if ((aux->turista2) > 0) {
-        printf("%s\n", pais->nomePais);
+        printf("%s\n", paises->nomePais);
       }
       break;
     case 7: // nao visitado
       if ((aux->turista1 == 0) && (aux->turista2 == 0)) {
-        printf("%s\n", pais->nomePais);
+        printf("%s\n", paises->nomePais);
       }
       break;
     }
