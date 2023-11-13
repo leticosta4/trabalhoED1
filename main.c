@@ -1,5 +1,5 @@
-#include "arvore.h"
-#include "lista.h"
+//#include "arvore.h"
+#include "clientes.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -13,11 +13,11 @@ int main() {
   Sitio *sitio = NULL;
   int qtd = 0;
 
-  // lerArquivoArvore(arquivo, qtd, &viagem);
+  lerArquivoArvore(arquivo, qtd, &viagem);
   lerArquivoLista(arquivo, &pais, &sitio);
-
-  emOrdem(viagem);
+  listarArvore(viagem);
   listarLista(pais);
+
 
   return 0;
 }
@@ -26,7 +26,7 @@ void lerArquivoArvore(FILE *arquivo, int qtd, Arvore **viagem) {
   char local[50];
   int prioridade = 0;
 
-  arquivo = fopen("TextoDeLet.txt", "r+");
+  arquivo = fopen("LetTexto.txt", "r+");
   if (arquivo == NULL) {
     printf("Erro, arquivo não aberto");
     return;
@@ -45,14 +45,14 @@ void lerArquivoLista(FILE *arquivo, Pais **pais, Sitio **sitio) {
   char nome[50];
   int indice = 0;
 
-  arquivo = fopen("Paises.txt", "r+");
+  arquivo = fopen("LetDestinos.txt", "r+");
   if (arquivo == NULL) {
     printf("Erro, arquivo não aberto");
     return;
   }
-  for (int i = 0; i < 14; i++) {
+  for (int i = 0; i < 26; i++) {
     fscanf(arquivo, "%d, %[^\n]", &indice, nome);
-    if (indice == 1) {
+    if (indice == 0) {
       (*pais) = inserirPaises(*pais, nome);
     } else {
       (*pais)->local = inserirCidade((*pais)->local, nome);
