@@ -30,10 +30,10 @@ void paginaInicial() {
     // função cliente tipo 2 que chama arvore
     break;
   case 3:
-    // chamar uma função que printa a lista principal
+    // chamar uma função que printa a lista principal (acho que poderia até ser a que cainan fez p teste)
     break;
   case 4:
-    // chamr alguma função com o cadastro
+    // chamr alguma função com o cadastro?? era mais uma ideia mostrar o cadastro
     break;
   case 5:
   case 6:
