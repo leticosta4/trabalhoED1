@@ -1,27 +1,28 @@
-#include "arvore.h" 
-#include "destinos.h"
-//tirar dps pq ja estao em clientes.h
-#include "clientes.h"
+#include "arvore.h"
+#include "lista.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-void lerArquivo(FILE *arquivo, int qtd, Arvore **viagem);
+void lerArquivoArvore(FILE *arquivo, int qtd, Arvore **viagem);
 void lerArquivoLista(FILE *arquivo, Pais **pais, Sitio **sitio);
 
-int main(void) {
+int main() {
   FILE *arquivo = NULL;
   Arvore *viagem = NULL;
+  Pais *pais = NULL;
+  Sitio *sitio = NULL;
   int qtd = 0;
 
-  lerArquivo(arquivo, qtd, &viagem);
-  
-  //chamar função da pagina inicial
-  listarArvore(viagem);
+  // lerArquivoArvore(arquivo, qtd, &viagem);
+  lerArquivoLista(arquivo, &pais, &sitio);
+
+  emOrdem(viagem);
+  listarLista(pais);
+
   return 0;
 }
 
-void lerArquivo(FILE *arquivo, int qtd, Arvore **viagem) {
+void lerArquivoArvore(FILE *arquivo, int qtd, Arvore **viagem) {
   char local[50];
   int prioridade = 0;
 
@@ -44,7 +45,7 @@ void lerArquivoLista(FILE *arquivo, Pais **pais, Sitio **sitio) {
   char nome[50];
   int indice = 0;
 
-  arquivo = fopen("Destinos.txt", "r+");
+  arquivo = fopen("Paises.txt", "r+");
   if (arquivo == NULL) {
     printf("Erro, arquivo não aberto");
     return;
