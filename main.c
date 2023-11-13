@@ -10,7 +10,7 @@ int main() {
   FILE *arquivo = NULL;
   Arvore *viagem = NULL;
   Pais *pais = NULL;
-  Sitio *sitio = NULL;
+  Sitio *sitio = NULL; //isso aq da p tirar
   int qtd = 0;
 
   lerArquivoArvore(arquivo, qtd, &viagem);
