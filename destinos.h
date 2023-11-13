@@ -12,19 +12,28 @@ typedef struct pais {
   struct pais *prox;
   Sitio *local;
   char nomePais[50];
-  int prioridade, quantTuristas = 0;
+  int prioridade, quantTuristas;
 } Pais;
 
+void listarLista(Pais *pais);
 Pais *inserirPaises(Pais *pais, char *local);
 Sitio *inserirCidade(Sitio *cidade, char *nome);
-void listasEspecificas(Pais *pais, int op);
+//void listasEspecificas(Pais *pais, int op); //so dps de turistas
 
-Pais *inserirPaises(Pais *pais, char *local) { 
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Pais *inserirPaises(Pais *pais, char *local) {
+
   Pais *novo;
-  novo = (Pais*)malloc(sizeof(Pais));
-  if (novo == NULL) { exit(1); }
+
+  novo = (Pais *)malloc(sizeof(Pais));
+
+  if (novo == NULL) {
+    exit(1);
+  }
+
   strcpy(novo->nomePais, local);
-  
+
   if (pais == NULL) {
     novo->prox = NULL;
   } else {
@@ -35,10 +44,18 @@ Pais *inserirPaises(Pais *pais, char *local) {
   return (pais);
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+
 Sitio *inserirCidade(Sitio *cidade, char *nome) {
+
   Sitio *novo;
-  novo = (Sitio*)malloc(sizeof(Sitio));
-  if (novo == NULL) { exit(1); }
+
+  novo = (Sitio *)malloc(sizeof(Sitio));
+
+  if (novo == NULL) {
+    exit(1);
+  }
+
   strcpy(novo->nomeSitio, nome);
 
   if (cidade == NULL) {
@@ -51,7 +68,26 @@ Sitio *inserirCidade(Sitio *cidade, char *nome) {
   return (cidade);
 }
 
-void listasEspecificas(Pais *pais, int op) {
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+void listarLista(Pais *pais) { //só p teste de debug
+  Pais *aux = NULL;
+  Sitio *city = NULL;
+
+  aux = pais;
+
+  while (aux != NULL) {
+    printf("%s\n", aux->nomePais);
+    city = aux->local;
+    while (city != NULL) {
+      printf("%s\n", city->nomeSitio);
+      city = city->prox;
+    }
+    aux = aux->prox;
+  }
+}
+
+/*void listasEspecificas(Pais *pais, int op) {
   Sitio *aux = pais->local;
   while (aux != NULL) {
     switch (op) {
@@ -73,4 +109,4 @@ void listasEspecificas(Pais *pais, int op) {
     }
     aux = aux->prox;
   }
-}
+}*/
