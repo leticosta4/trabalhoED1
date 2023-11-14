@@ -7,48 +7,52 @@
 
 void lerArquivoArvore(FILE *arquivo, int qtd, Arvore **viagem);
 void lerArquivoLista(FILE *arquivo, Pais **pais);
-
+void pausar();
 int main() {
   FILE *arquivo = NULL;
   Arvore *viagem = NULL;
   Pais *pais = NULL;
   Sitio *sitio = NULL;
-  int qtd = 0,opcao = 0;
+  int qtd = 0;
+  char opcao;
 
   lerArquivoArvore(arquivo, qtd, &viagem);
   lerArquivoLista(arquivo, &pais);
   //listarArvore(viagem);
   //listarLista(pais);
+  do{
   printf("Bem vindo à Viagens ED1!\n\n");
   //aviao();
+  system("clear");
   menu();
   printf("Digite a opção desejada: \n");
-  // scanf("%d", &opcao);
-  opcao = 2;
-  system("clear");
+  scanf(" %c", &opcao);
+  
   switch (opcao) {
-  case 1:
+  case '1':
     clienteTipo1();
     break;
-  case 2:
+  case '2':
     arvoreRespostas(viagem);
     break;
-  case 3:
+  case '3':
     listarLista(pais);
+    pausar();
     break;
-  case 4:
-  case 5:
-  case 6:
+  case '4':
+  case '5':
+  case '6':
     // listasEspecificas(paises, opcao);
     break;
-  case 7:
+  case '7':
     exit(1);
 
     default:
       printf("Opção Inválida!!\n");
+      sleep(2);
       break;
   }
-
+  }while(opcao != 8);
   return 0;
 }
 
@@ -89,5 +93,12 @@ void lerArquivoLista(FILE *arquivo, Pais **pais) {
     }
   }
   fclose(arquivo);
+}
+
+void pausar(){
+  printf("Pressione Enter para continuar...\n");
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF);
+  getchar();
 }
 
