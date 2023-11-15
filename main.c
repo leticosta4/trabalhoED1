@@ -1,9 +1,8 @@
 //#include "arvore.h"
 #include "clientes.h"
+#include "interface.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "interface.h"
-
 
 void lerArquivoArvore(FILE *arquivo, int qtd, Arvore **viagem);
 void lerArquivoLista(FILE *arquivo, Pais **pais);
@@ -15,44 +14,55 @@ int main() {
   Sitio *sitio = NULL;
   int qtd = 0;
   char opcao;
+  
 
   lerArquivoArvore(arquivo, qtd, &viagem);
   lerArquivoLista(arquivo, &pais);
-  //listarArvore(viagem);
-  //listarLista(pais);
-  do{
+  // listarArvore(viagem);
+  // listarLista(pais);
+
   printf("Bem vindo à Viagens ED1!\n\n");
   //aviao();
-  system("clear");
-  menu();
-  printf("Digite a opção desejada: \n");
-  scanf(" %c", &opcao);
+ // pausar();
+
+  do {
+    // printf("Bem vindo à Viagens ED1!\n\n");
+    // aviao();
+    system("clear");
+    menu();
+    printf("Digite a opção desejada: ");
+    scanf(" %c", &opcao);
+    system("clear");
   
-  switch (opcao) {
-  case '1':
-    clienteTipo1();
-    break;
-  case '2':
-    arvoreRespostas(viagem);
-    break;
-  case '3':
-    listarLista(pais);
-    pausar();
-    break;
-  case '4':
-  case '5':
-  case '6':
-    // listasEspecificas(paises, opcao);
-    break;
-  case '7':
-    exit(1);
+    switch (opcao) {
+    case '1':
+      clienteTipo1(pais," ",1);
+      pausar();
+      break;
+    case '2':
+      clienteTipo1(pais,arvoreRespostas(viagem),2);
+      pausar();
+      break;
+    case '3':
+      listarLista(pais);
+      pausar();
+      break;
+    case '4':
+    case '5':
+    case '6':
+    case '7':
+      listasEspecificas(pais, opcao);
+      pausar();
+      break;
+    case '8':
+      exit(1);
 
     default:
       printf("Opção Inválida!!\n");
       sleep(2);
       break;
-  }
-  }while(opcao != 8);
+    }
+  } while (opcao != 8);
   return 0;
 }
 
@@ -66,7 +76,7 @@ void lerArquivoArvore(FILE *arquivo, int qtd, Arvore **viagem) {
     return;
   }
 
-  for (int i = 0; i < 16; i++) {
+  for (int i = 0; i < 33; i++) {
 
     fscanf(arquivo, "%d,%[^\n]", &prioridade, local);
     (*viagem) = inserir(*viagem, prioridade, local);
@@ -95,10 +105,10 @@ void lerArquivoLista(FILE *arquivo, Pais **pais) {
   fclose(arquivo);
 }
 
-void pausar(){
+void pausar() {
   printf("Pressione Enter para continuar...\n");
   int c;
-  while ((c = getchar()) != '\n' && c != EOF);
+  while ((c = getchar()) != '\n' && c != EOF)
+    ;
   getchar();
 }
-

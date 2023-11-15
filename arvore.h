@@ -10,7 +10,7 @@ typedef struct arvore {
   int prioridade;
 } Arvore;
 
-void arvoreRespostas(Arvore *viagens);
+char* arvoreRespostas(Arvore *viagens);
 Arvore *inserir(Arvore *, int, char *);
 // int busca(Arvore*, int);
 void listarArvore(Arvore *);
@@ -55,17 +55,29 @@ void listarArvore(Arvore *raiz) { // esse que tem que usar
   listarArvore(raiz->nao);
 }
 
-void arvoreRespostas(Arvore *viagens) {
+char* arvoreRespostas(Arvore *viagens) {
   char resp;
-   do {
+
+
+  if (viagens->sim == NULL && viagens->nao == NULL ){
+    system("clear");
+    printf("O país selecionado após intensa pesquisa foi: %s\n", viagens->pergunta);
+    return (viagens->pergunta);
+  }
+  
+  do {
     sleep(1);
     system("clear");
     printf("Responda!\n");
     printf("%s\n", viagens->pergunta);
     scanf(" %c", &resp);
   } while (!erroResposta(resp));
+
+ 
+  
   if (resp == 85 || resp == 115)
-    arvoreRespostas(viagens->sim);
-  else
-    arvoreRespostas(viagens->nao);
+    return arvoreRespostas(viagens->sim);
+   else 
+    return arvoreRespostas(viagens->nao);
+  
 }
