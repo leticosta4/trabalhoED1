@@ -111,53 +111,66 @@ void listasEspecificas(Pais *pais, char op) {
 void listarSemAuxilio(Pais *pais) {
   Pais *aux = NULL;
   Sitio *city = NULL;
-
+  int cont;
   aux = pais;
 
   while (aux != NULL) {
-    printf("País: %s\n", aux->nomePais);
+    cont = 0;
     city = aux->local;
+    
     while (city != NULL) {
-      if (city->turista1 > 0)
+      if (city->turista1 > 0){
+        if(cont == 0){ printf("País: %s\n", aux->nomePais); cont++;}
         printf("\t  %s\n", city->nomeSitio);
+        if(city->prox == NULL) printf("\n");
+      }
+     
       city = city->prox;
+      
     }
-    printf("\n");
+
     aux = aux->prox;
+    
   }
 }
 
 void listarComAuxilio(Pais *pais){
   Pais *aux = NULL;
   Sitio *city = NULL;
-
+  int cont;
   aux = pais;
   
   while (aux != NULL) {
-    printf("País: %s\n", aux->nomePais);
+    cont = 0;
     city = aux->local;
     while (city != NULL) {
-      if (city->turista2 > 0)
+      if (city->turista2 > 0){
+        if(cont == 0){ printf("País: %s\n", aux->nomePais); cont++;}
         printf("\t  %s\n", city->nomeSitio);
+        if(city->prox == NULL) printf("\n");
+      }
       city = city->prox;
+     
     }
-    printf("\n");
     aux = aux->prox;
+    
   }
 }
 
 void listarNaoVisitados(Pais *pais){
   Pais *aux = NULL;
   Sitio *city = NULL;
-
+  int cont = 0;
   aux = pais;
 
   while (aux != NULL) {
     printf("País: %s\n", aux->nomePais);
     city = aux->local;
     while (city != NULL) {
-      if (city->turista1 == 0 && city->turista2 == 0)
+      if (city->turista1 == 0 && city->turista2 == 0){
         printf("\t  %s\n", city->nomeSitio);
+       if(city->prox == NULL) printf("\n");
+      }
       city = city->prox;
     }
     printf("\n");

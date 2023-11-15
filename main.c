@@ -108,7 +108,7 @@ void lerArquivoLista(FILE *arquivo, Pais **pais) {
 void pausar() {
   printf("Pressione Enter para continuar...\n");
   int c;
-  while ((c = getchar()) != '\n' && c != EOF)
-    ;
   getchar();
+  while ((c = getchar()) != '\n' && c != EOF);
+  
 }
