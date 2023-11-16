@@ -219,6 +219,7 @@ void paisMaisVisitado(Pais *pais){
 
   while(aux != NULL){
     if(aux->quantTuristas > maior->quantTuristas){
+      memset(nomesPaises, '\0', sizeof(nomesPaises));
       cont = 0;
       strcpy(nomesPaises[cont],aux->nomePais);
       maior = aux;
@@ -239,6 +240,7 @@ void paisMaisVisitado(Pais *pais){
 
   printf("País(es) mais visitado(s):\n");
   for(int i = 0; i < 10; i++){
-    printf("%s\n", nomesPaises[i]);
+    if(strcmp(nomesPaises[i], "") != 0)
+        printf("%s\n", nomesPaises[i]);
   }
 }
