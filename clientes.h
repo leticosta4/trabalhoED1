@@ -65,5 +65,8 @@ void compIncrementa(char *country, char *city, Pais *pais, int tipoCliente) {
       else 
         (auxCidade->turista2)++;
     }
+      else{
+      auxPais->quantTuristas--;
+    }
   }
 }
