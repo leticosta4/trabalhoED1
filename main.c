@@ -14,7 +14,7 @@ int main() {
   Sitio *sitio = NULL;
   int qtd = 0;
   char opcao;
-  
+
   lerArquivoArvore(arquivo, qtd, &viagem);
   lerArquivoLista(arquivo, &pais);
 
@@ -31,7 +31,7 @@ int main() {
     printf("Digite a opção desejada: ");
     scanf(" %c", &opcao);
     system("clear");
-  
+
     switch (opcao) {
     case '1':
       addCliente(pais,"",1);
@@ -54,7 +54,10 @@ int main() {
       break;
     case '8':
       paisMaisVisitado(pais);
+      pausar();
       break;
+    case '9':
+      exit(1);
     default:
       printf("Opção Inválida!!\n");
       sleep(2);
@@ -79,7 +82,7 @@ void lerArquivoArvore(FILE *arquivo, int qtd, Arvore **viagem) {
     fscanf(arquivo, "%d,%[^\n]", &prioridade, local);
     (*viagem) = inserir(*viagem, prioridade, local);
   }
-  
+
   fclose(arquivo);
 }
 
@@ -92,7 +95,7 @@ void lerArquivoLista(FILE *arquivo, Pais **pais) {
     printf("Erro, arquivo não aberto");
     return;
   }
-  for (int i = 0; i < 26; i++) {
+  for (int i = 0; i < 27; i++) {
     fscanf(arquivo, "%d, %[^\n]", &indice, nome);
     if (indice == 0) {
       (*pais) = inserirPaises(*pais, nome);
@@ -109,12 +112,4 @@ void pausar() {
   int c;
   while ((c = getchar()) != '\n' && c != EOF);
   getchar();
-}
-
-void zeraTuristas(Pais *pais){
-  Pais *aux = pais;
-  while(aux != NULL){
-    aux->quantTuristas = 0;
-    aux = aux->prox;
-  }
 }
