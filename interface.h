@@ -21,13 +21,13 @@ void menu() {
          "auxílio│\n");
   printf("\t\t\t\t\t\t│6 - Listar países e sítios turísticos não visitados     "
          "     │\n");
-  printf("\t\t\t\t\t\t│7 - Listar só países e sítios turísticos visitados     "
+  printf("\t\t\t\t\t\t│7 - Listar só países e sítios turísticos visitados      "
          "     │\n");
   printf("\t\t\t\t\t\t│8 - Ver país mais visitado                              "
      "     │\n");
   printf("\t\t\t\t\t\t│9 - Sair                                              "
      "       │\n");
-  
+
   printf("\t\t\t\t\t\t└────────────────────────────────────────────────────────"
          "─────┘\n");
 }
