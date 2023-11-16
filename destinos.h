@@ -18,10 +18,12 @@ typedef struct pais {
 void listarSemAuxilio(Pais *);
 void listarComAuxilio(Pais *);
 void listarNaoVisitados(Pais *);
+void listarSoVisitados(Pais *);
 void listarLista(Pais *);
 Pais *inserirPaises(Pais *, char *);
 Sitio *inserirCidade(Sitio *, char *);
-void listasEspecificas(Pais *, char ); // so dps de turistas
+void listasEspecificas(Pais *, char ); 
+void paisMaisVisitado(Pais *pais);
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -47,8 +49,6 @@ Pais *inserirPaises(Pais *pais, char *local) {
   return (pais);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-
 Sitio *inserirCidade(Sitio *cidade, char *nome) {
 
   Sitio *novo;
@@ -71,8 +71,6 @@ Sitio *inserirCidade(Sitio *cidade, char *nome) {
   return (cidade);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-
 void listarLista(Pais *pais) {
   Pais *aux = NULL;
   Sitio *city = NULL;
@@ -92,7 +90,7 @@ void listarLista(Pais *pais) {
 }
 
 void listasEspecificas(Pais *pais, char op) {
-  
+
   switch (op) {
   case '4':
     listarSemAuxilio(pais);
@@ -103,7 +101,9 @@ void listasEspecificas(Pais *pais, char op) {
   case '6':
     listarNaoVisitados(pais);
     break;
-  
+  case '7':
+    listarSoVisitados(pais);
+    break;
   }
 }
 
@@ -186,20 +186,45 @@ void listarNaoVisitados(Pais *pais) {
   }
 }
 
+void listarSoVisitados(Pais *pais){
+  Pais *aux = NULL;
+  Sitio *city = NULL;
+  int cont;
+  aux = pais;
+  while (aux != NULL) {
+    cont = 0;
+    city = aux->local;
+    while (city != NULL) {
+      if (city->turista1 > 0 || city->turista2 > 0) {
+        if (cont == 0) {
+          printf("País: %s\n", aux->nomePais);
+          cont++;
+        }
+        printf("\t  %s\n", city->nomeSitio);
+        if (city->prox == NULL)
+          printf("\n");
+      }
+      city = city->prox;
+    }
+    printf("\n");
+    aux = aux->prox;
+  }
+}
 
 void paisMaisVisitado(Pais *pais){
-//portugal = 10, brasil = 10;
   Pais *aux = pais;
   Pais *maior = pais;
   char nomesPaises[10][50] = {""};
   int cont = 0;
+
   while(aux != NULL){
-    if(aux->quantTuristas >maior->quantTuristas){
+    if(aux->quantTuristas > maior->quantTuristas){
       cont = 0;
       strcpy(nomesPaises[cont],aux->nomePais);
       maior = aux;
+      cont++;
     }
-    else if (aux->quantTuristas>0 && (aux->quantTuristas == maior->quantTuristas)){
+    else if ((aux->quantTuristas > 0) && (aux->quantTuristas == maior->quantTuristas)){
       if(cont != 0){
         strcpy(nomesPaises[cont],aux->nomePais);
       }
@@ -212,13 +237,8 @@ void paisMaisVisitado(Pais *pais){
     aux = aux->prox;
   }
 
-  printf("Mais visitados");
-  for(int i =0;i<10;i++){
+  printf("País(es) mais visitado(s):\n");
+  for(int i = 0; i < 10; i++){
     printf("%s\n", nomesPaises[i]);
   }
-  
- 
-
-
-  
 }
