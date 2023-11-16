@@ -15,13 +15,13 @@ typedef struct pais {
   int prioridade, quantTuristas;
 } Pais;
 
-void listarSemAuxilio(Pais *pais);
-void listarComAuxilio(Pais *pais);
-void listarNaoVisitados(Pais *pais);
-void listarLista(Pais *pais);
-Pais *inserirPaises(Pais *pais, char *local);
-Sitio *inserirCidade(Sitio *cidade, char *nome);
-void listasEspecificas(Pais *pais, char op); // so dps de turistas
+void listarSemAuxilio(Pais *);
+void listarComAuxilio(Pais *);
+void listarNaoVisitados(Pais *);
+void listarLista(Pais *);
+Pais *inserirPaises(Pais *, char *);
+Sitio *inserirCidade(Sitio *, char *);
+void listasEspecificas(Pais *, char ); // so dps de turistas
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -93,20 +93,19 @@ void listarLista(Pais *pais) {
 
 void listasEspecificas(Pais *pais, char op) {
   
-
   switch (op) {
   case '4':
-      listarSemAuxilio(pais);
-      break;
+    listarSemAuxilio(pais);
+    break;
   case '5':
-      listarComAuxilio(pais);
+    listarComAuxilio(pais);
     break;
   case '6':
     listarNaoVisitados(pais);
     break;
-    }
+  
   }
-
+}
 
 void listarSemAuxilio(Pais *pais) {
   Pais *aux = NULL;
@@ -117,63 +116,109 @@ void listarSemAuxilio(Pais *pais) {
   while (aux != NULL) {
     cont = 0;
     city = aux->local;
-    
+
     while (city != NULL) {
-      if (city->turista1 > 0){
-        if(cont == 0){ printf("País: %s\n", aux->nomePais); cont++;}
+      if (city->turista1 > 0) {
+        if (cont == 0) {
+          printf("País: %s\n", aux->nomePais);
+          cont++;
+        }
         printf("\t  %s\n", city->nomeSitio);
-        if(city->prox == NULL) printf("\n");
+        if (city->prox == NULL)
+          printf("\n");
       }
-     
+
       city = city->prox;
-      
     }
 
     aux = aux->prox;
-    
   }
 }
 
-void listarComAuxilio(Pais *pais){
+void listarComAuxilio(Pais *pais) {
   Pais *aux = NULL;
   Sitio *city = NULL;
   int cont;
   aux = pais;
-  
+
   while (aux != NULL) {
     cont = 0;
     city = aux->local;
     while (city != NULL) {
-      if (city->turista2 > 0){
-        if(cont == 0){ printf("País: %s\n", aux->nomePais); cont++;}
+      if (city->turista2 > 0) {
+        if (cont == 0) {
+          printf("País: %s\n", aux->nomePais);
+          cont++;
+        }
         printf("\t  %s\n", city->nomeSitio);
-        if(city->prox == NULL) printf("\n");
+        if (city->prox == NULL)
+          printf("\n");
       }
       city = city->prox;
-     
     }
     aux = aux->prox;
-    
   }
 }
 
-void listarNaoVisitados(Pais *pais){
+void listarNaoVisitados(Pais *pais) {
   Pais *aux = NULL;
   Sitio *city = NULL;
-  int cont = 0;
+  int cont;
   aux = pais;
 
   while (aux != NULL) {
-    printf("País: %s\n", aux->nomePais);
+    cont = 0;
     city = aux->local;
     while (city != NULL) {
-      if (city->turista1 == 0 && city->turista2 == 0){
+      if (city->turista1 == 0 && city->turista2 == 0) {
+        if (cont == 0) {
+          printf("País: %s\n", aux->nomePais);
+          cont++;
+        }
         printf("\t  %s\n", city->nomeSitio);
-       if(city->prox == NULL) printf("\n");
+        if (city->prox == NULL)
+          printf("\n");
       }
       city = city->prox;
     }
     printf("\n");
     aux = aux->prox;
   }
+}
+
+
+void paisMaisVisitado(Pais *pais){
+//portugal = 10, brasil = 10;
+  Pais *aux = pais;
+  Pais *maior = pais;
+  char nomesPaises[10][50] = {""};
+  int cont = 0;
+  while(aux != NULL){
+    if(aux->quantTuristas >maior->quantTuristas){
+      cont = 0;
+      strcpy(nomesPaises[cont],aux->nomePais);
+      maior = aux;
+    }
+    else if (aux->quantTuristas>0 && (aux->quantTuristas == maior->quantTuristas)){
+      if(cont != 0){
+        strcpy(nomesPaises[cont],aux->nomePais);
+      }
+      else{
+        strcpy(nomesPaises[cont],aux->nomePais);
+        maior = aux;
+      }
+      cont++;
+    }
+    aux = aux->prox;
+  }
+
+  printf("Mais visitados");
+  for(int i =0;i<10;i++){
+    printf("%s\n", nomesPaises[i]);
+  }
+  
+ 
+
+
+  
 }

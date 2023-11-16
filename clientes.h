@@ -4,20 +4,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "interface.h"
+void cliente(Pais *, char*, int);
 
-void clienteTipo1(Pais *pais, char*, int);
-//void clienteTipo2(Pais *, char *);
-void compIncrementa(char *country, char *city, Pais *pais, int);
+void compIncrementa(char *, char *, Pais *, int);
 
-void clienteTipo1(Pais *pais, char *localDestino, int tipoCLiente) {
+void addCliente(Pais *pais, char *localDestino, int tipoCLiente) {
   char destino[50] = "", country[30] = "", sitioTuristico[30] = "";
   int i, j, k, l = 0;
 
   if(tipoCLiente == 1){
-  printf("\nDigite o local de destino desejado\n");
-  printf("Modelo: pais, sitio turistico\n");
+  opcao1Menu();
   scanf(" %[^\n]", destino);
-  getchar();
+  //getchar();
   }
   else
     strcpy(destino, localDestino);
@@ -35,7 +34,6 @@ void clienteTipo1(Pais *pais, char *localDestino, int tipoCLiente) {
 
   for (k = i + 1; k < strlen(destino); k++) {
     if (destino[k] != ' ' || destino[k - 1] != ',') {
-     // printf("Cheguei aqui\n %c", destino[k]);
       sitioTuristico[l] = destino[k];
       l++;
     }
@@ -52,11 +50,12 @@ void compIncrementa(char *country, char *city, Pais *pais, int tipoCliente) {
   }
 
   if (strcmp(country, auxPais->nomePais) == 0) { // achou o pais igual
+    
     (auxPais->quantTuristas)++;
     auxCidade = auxPais->local;
 
-    while ((auxCidade->prox != NULL) &&
-           (strcmp(city, auxCidade->nomeSitio) != 0)) {
+    
+    while ((auxCidade->prox != NULL) && (strcmp(city, auxCidade->nomeSitio) != 0)) {
       auxCidade = auxCidade->prox;
     }
 
@@ -68,47 +67,3 @@ void compIncrementa(char *country, char *city, Pais *pais, int tipoCliente) {
     }
   }
 }
-
-/*void clienteTipo2(char *localEscolhido, Pais *listaPais) {
-  Pais *aux = NULL;
-  Sitio *city = NULL;
-
-  aux = listaPais;
-
-  while (aux != NULL) {
-    if ( aux->nomePais)
-    city = aux->local;
-    while (city != NULL) {
-      printf("\t  %s\n", city->nomeSitio);
-      city = city->prox;
-    }
-    printf("\n");
-    aux = aux->prox;
-}*/
-
-/*void ClienteTipo2(Pais *pais, char *destino) {
-  char country[30] = "", sitioTuristico[30] = "";
-  int i, j, k, l = 0, tipoCliente = 2;
-
-
-  for (int j = 0; j < strlen(destino); j++) {
-    destino[j] = toupper(destino[j]);
-  }
-
-  for (i = 0; i < strlen(destino); i++) {
-    if (destino[i] == ',') {
-      break;
-    }
-    country[i] = destino[i];
-  }
-
-  for (k = i + 1; k < strlen(destino); k++) {
-    if (destino[k] != ' ' || destino[k - 1] != ',') {
-      printf("Cheguei aqui: %c\n", destino[k]);
-      sitioTuristico[l] = destino[k];
-      l++;
-    }
-  }
-
-   //compIncrementa(country, sitioTuristico, pais);
-} */

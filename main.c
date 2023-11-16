@@ -1,11 +1,11 @@
 //#include "arvore.h"
 #include "clientes.h"
-#include "interface.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-void lerArquivoArvore(FILE *arquivo, int qtd, Arvore **viagem);
-void lerArquivoLista(FILE *arquivo, Pais **pais);
+void zeraTuristas(Pais *);
+void lerArquivoArvore(FILE *, int , Arvore **);
+void lerArquivoLista(FILE *, Pais **);
 void pausar();
 int main() {
   FILE *arquivo = NULL;
@@ -15,15 +15,13 @@ int main() {
   int qtd = 0;
   char opcao;
   
-
   lerArquivoArvore(arquivo, qtd, &viagem);
   lerArquivoLista(arquivo, &pais);
-  // listarArvore(viagem);
-  // listarLista(pais);
+
 
   printf("Bem vindo à Viagens ED1!\n\n");
-  //aviao();
- // pausar();
+  // aviao();
+  //  pausar();
 
   do {
     // printf("Bem vindo à Viagens ED1!\n\n");
@@ -36,11 +34,11 @@ int main() {
   
     switch (opcao) {
     case '1':
-      clienteTipo1(pais," ",1);
+      addCliente(pais,"",1);
       pausar();
       break;
     case '2':
-      clienteTipo1(pais,arvoreRespostas(viagem),2);
+      addCliente(pais,arvoreRespostas(viagem),2);
       pausar();
       break;
     case '3':
@@ -55,14 +53,14 @@ int main() {
       pausar();
       break;
     case '8':
-      exit(1);
-
+      paisMaisVisitado(pais);
+      break;
     default:
       printf("Opção Inválida!!\n");
       sleep(2);
       break;
     }
-  } while (opcao != 8);
+  } while (opcao != 9);
   return 0;
 }
 
@@ -81,7 +79,7 @@ void lerArquivoArvore(FILE *arquivo, int qtd, Arvore **viagem) {
     fscanf(arquivo, "%d,%[^\n]", &prioridade, local);
     (*viagem) = inserir(*viagem, prioridade, local);
   }
-
+  
   fclose(arquivo);
 }
 
@@ -101,6 +99,7 @@ void lerArquivoLista(FILE *arquivo, Pais **pais) {
     } else {
       (*pais)->local = inserirCidade((*pais)->local, nome);
     }
+    //zeraTuristas((*pais));
   }
   fclose(arquivo);
 }
@@ -108,7 +107,14 @@ void lerArquivoLista(FILE *arquivo, Pais **pais) {
 void pausar() {
   printf("Pressione Enter para continuar...\n");
   int c;
-  getchar();
   while ((c = getchar()) != '\n' && c != EOF);
-  
+  getchar();
+}
+
+void zeraTuristas(Pais *pais){
+  Pais *aux = pais;
+  while(aux != NULL){
+    aux->quantTuristas = 0;
+    aux = aux->prox;
+  }
 }

@@ -10,10 +10,10 @@ typedef struct arvore {
   int prioridade;
 } Arvore;
 
-char* arvoreRespostas(Arvore *viagens);
+char* arvoreRespostas(Arvore *);
 Arvore *inserir(Arvore *, int, char *);
-// int busca(Arvore*, int);
 void listarArvore(Arvore *);
+
 
 Arvore *inserir(Arvore *raiz, int n, char *l) {
   if (raiz == NULL) {
@@ -36,16 +36,6 @@ Arvore *inserir(Arvore *raiz, int n, char *l) {
   }
   return raiz;
 }
-
-/*
-int busca(Arvore *raiz, int n){
-  if(raiz == NULL) return 0;
-
-  if(raiz->prioridade  == n) return 1;
-  else if(raiz->prioridade < n) busca(raiz->nao, n);
-  else busca(raiz->sim,n);
-}
-*/
 
 void listarArvore(Arvore *raiz) { // esse que tem que usar
   if (raiz == NULL)

@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include <unistd.h>
+void opcao1Menu();
+void menu();
+void aviao();
 
 void menu() {
-  printf("\t\t\t\t\t\t┌────────────────────────────────────────────────────────"
-         "─────┐\n");
+  printf("\t\t\t\t\t\t┌─────────────────────────────────────────────────────────────┐\n");
+  printf("\t\t\t\t\t\t│\t\t  Bem Vindo a Let Airlines. Selecione uma opção\t\t  │\n");
+  printf("\t\t\t\t\t\t├────────────────────────────────────────────────────────"
+         "─────┤\n");
   printf("\t\t\t\t\t\t│1 - Já sei para onde quero viajar                       "
          "     │\n");
   printf("\t\t\t\t\t\t│2 - Não sei para onde quero viajar (SUGESTÕES)          "
@@ -18,8 +23,11 @@ void menu() {
          "     │\n");
   printf("\t\t\t\t\t\t│7 - Listar alguma coisa                                 "
          "     │\n");
-  printf("\t\t\t\t\t\t│8 - Sair                                                "
+  printf("\t\t\t\t\t\t│8 - Ver país mais visitado                              "
      "     │\n");
+  printf("\t\t\t\t\t\t│9 - Sair                                              "
+     "       │\n");
+  
   printf("\t\t\t\t\t\t└────────────────────────────────────────────────────────"
          "─────┘\n");
 }
@@ -202,4 +210,11 @@ void aviao() {
          "555555555555555555555555555555555555555555555555555555555555555555555"
          "55555555555555555555555555555555555555555555555555555555555555\n");
   usleep(60000);
+}
+
+void opcao1Menu(){
+  printf("\t\t\t\t\t\t┌─────────────────────────────────────────────────────────────┐\n");
+  printf("\t\t\t\t\t\t│\t\t  Digite o local de destino desejado        \t\t  │\n");
+  printf("\t\t\t\t\t\t│\t\t  Modelo: pais, sitio turistico             \t\t  │\n");
+  printf("\t\t\t\t\t\t└─────────────────────────────────────────────────────────────┘\n");
 }
