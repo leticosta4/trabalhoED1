@@ -212,35 +212,69 @@ void listarSoVisitados(Pais *pais){
 }
 
 void paisMaisVisitado(Pais *pais){
-  Pais *aux = pais;
-  Pais *maior = pais;
-  char nomesPaises[10][50] = {""};
-  int cont = 0;
+  Pais *aux = pais, *maiorPais = pais;
+  Sitio *city = NULL, *maiorCidade = NULL;
+  char nomesPaises[10][50] = {""}, nomesCidades[17][50] = {""}; //caso tenha mais de um
+  int cont = 0, cont2 = 0;
 
   while(aux != NULL){
-    if(aux->quantTuristas > maior->quantTuristas){
+    if(aux->quantTuristas > maiorPais->quantTuristas){
       memset(nomesPaises, '\0', sizeof(nomesPaises));
       cont = 0;
       strcpy(nomesPaises[cont],aux->nomePais);
-      maior = aux;
+      maiorPais = aux;
       cont++;
     }
-    else if ((aux->quantTuristas > 0) && (aux->quantTuristas == maior->quantTuristas)){
+    else if ((aux->quantTuristas > 0) && (aux->quantTuristas == maiorPais->quantTuristas)){
       if(cont != 0){
         strcpy(nomesPaises[cont],aux->nomePais);
       }
       else{
         strcpy(nomesPaises[cont],aux->nomePais);
-        maior = aux;
+        maiorPais = aux;
       }
       cont++;
     }
-    aux = aux->prox;
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    city = aux -> local;
+    if (maiorCidade == NULL){
+      maiorCidade = city; //imp
+    }
+    //printf( "caractere: %c\n", nomesCidades[0][2]);
+
+    while(city != NULL){
+      if((city->turista1 + city->turista2) > (maiorCidade->turista1 + maiorCidade->turista2)){
+        memset(nomesCidades, '\0', sizeof(nomesCidades));
+        printf( "%c\n", nomesCidades[0][2]);
+        cont2 = 0;  
+        strcpy(nomesCidades[cont2],city->nomeSitio);
+        maiorCidade = city;
+        cont2++;
+        //printf("Soma: %d", city->turista1 + city->turista2);
+      }
+      else if (((city->turista1 + city->turista2) > 0) && (city->turista1 + city->turista2) == (maiorCidade->turista1 + maiorCidade->turista2)){ //caso seja igual 
+        if(cont2 != 0){
+          strcpy(nomesCidades[cont2],city->nomeSitio);
+        }
+        else{
+          strcpy(nomesCidades[cont2],city->nomeSitio);
+          maiorCidade = city;
+        }
+        cont2++;
+      }
+      city = city->prox;
+    }
+    aux = aux->prox; 
   }
 
-  printf("País(es) mais visitado(s):\n");
+  printf("País(es) mais visitado(s):\n"); //ainda tem que tirar os espaços vazios que ficam dos outros países
   for(int i = 0; i < 10; i++){
     if(strcmp(nomesPaises[i], "") != 0)
         printf("%s\n", nomesPaises[i]);
+  }
+  printf("Estado(s)/Cidade(s) mais visitado/a(s):\n"); //ainda tem que tirar os espaços vazios que ficam dos outros países
+  for(int i = 0; i < 17; i++){
+    if(strcmp(nomesCidades[i], "") != 0)
+        printf("%s\n", nomesCidades[i]);
   }
 }
