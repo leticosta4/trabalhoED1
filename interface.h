@@ -6,7 +6,7 @@ void aviao();
 
 void menu() {
   printf("\t\t\t\t\t\t┌─────────────────────────────────────────────────────────────┐\n");
-  printf("\t\t\t\t\t\t│\t\t  Bem-Vindo à Let Airlines. Selecione uma opção\t\t  │\n");
+  printf("\t\t\t\t\t\t│      Bem-Vindo(a) à Let Airlines. Selecione uma opção\t\t  │\n");
   printf("\t\t\t\t\t\t├────────────────────────────────────────────────────────"
          "─────┤\n");
   printf("\t\t\t\t\t\t│1 - Já sei para onde quero viajar                       "
@@ -23,7 +23,7 @@ void menu() {
          "     │\n");
   printf("\t\t\t\t\t\t│7 - Listar só países e sítios turísticos visitados      "
          "     │\n");
-  printf("\t\t\t\t\t\t│8 - Ver país mais visitado                              "
+  printf("\t\t\t\t\t\t│8 - Ver país e sítio turístico mais visitados           "
      "     │\n");
   printf("\t\t\t\t\t\t│9 - Sair                                              "
      "       │\n");
