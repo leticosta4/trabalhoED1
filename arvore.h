@@ -54,7 +54,7 @@ char* arvoreRespostas(Arvore *viagens) {
     printf("O país selecionado após intensa pesquisa foi: %s\n", viagens->pergunta);
     return (viagens->pergunta);
   }
-  
+
   do {
     sleep(1);
     system("clear");
@@ -63,11 +63,11 @@ char* arvoreRespostas(Arvore *viagens) {
     scanf(" %c", &resp);
   } while (!erroResposta(resp));
 
- 
-  
-  if (resp == 85 || resp == 115)
+
+
+  if (resp == 's' || resp == 'S' )
     return arvoreRespostas(viagens->sim);
    else 
     return arvoreRespostas(viagens->nao);
-  
+
 }
