@@ -1,9 +1,7 @@
-//#include "arvore.h"
 #include "clientes.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-void zeraTuristas(Pais *);
 void lerArquivoArvore(FILE *, int, Arvore **);
 void lerArquivoLista(FILE *, Pais **);
 
@@ -23,8 +21,6 @@ int main() {
   pausar();
 
   do {
-    // printf("Bem vindo à Viagens ED1!\n\n");
-    // aviao();
     system("clear");
     menu();
     printf("Digite a opção desejada: ");
@@ -52,7 +48,9 @@ int main() {
       pausar();
       break;
     case '8':
-      paisMaisVisitado(pais);
+      if(paisMaisVisitado(pais) != 0){ //so chama a função de cidade mais visitada se tiver algum pais
+        cidadeMaisVisitada(pais);
+      }
       pausar();
       break;
     case '9':
@@ -101,7 +99,6 @@ void lerArquivoLista(FILE *arquivo, Pais **pais) {
     } else {
       (*pais)->local = inserirCidade((*pais)->local, nome);
     }
-    // zeraTuristas((*pais));
   }
   fclose(arquivo);
 }
