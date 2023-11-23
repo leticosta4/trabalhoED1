@@ -4,9 +4,9 @@
 #include <stdlib.h>
 
 void zeraTuristas(Pais *);
-void lerArquivoArvore(FILE *, int , Arvore **);
+void lerArquivoArvore(FILE *, int, Arvore **);
 void lerArquivoLista(FILE *, Pais **);
-void pausar();
+
 int main() {
   FILE *arquivo = NULL;
   Arvore *viagem = NULL;
@@ -18,10 +18,9 @@ int main() {
   lerArquivoArvore(arquivo, qtd, &viagem);
   lerArquivoLista(arquivo, &pais);
 
-
   printf("Bem vindo à Viagens ED1!\n\n");
-  // aviao();
-  //  pausar();
+  aviao();
+  pausar();
 
   do {
     // printf("Bem vindo à Viagens ED1!\n\n");
@@ -34,11 +33,11 @@ int main() {
 
     switch (opcao) {
     case '1':
-      addCliente(pais,"",1);
+      addCliente(pais, "", 1);
       pausar();
       break;
     case '2':
-      addCliente(pais,arvoreRespostas(viagem),2);
+      addCliente(pais, arvoreRespostas(viagem), 2);
       pausar();
       break;
     case '3':
@@ -102,14 +101,7 @@ void lerArquivoLista(FILE *arquivo, Pais **pais) {
     } else {
       (*pais)->local = inserirCidade((*pais)->local, nome);
     }
-    //zeraTuristas((*pais));
+    // zeraTuristas((*pais));
   }
   fclose(arquivo);
-}
-
-void pausar() {
-  printf("Pressione Enter para continuar...\n");
-  int c;
-  while ((c = getchar()) != '\n' && c != EOF);
-  getchar();
 }
