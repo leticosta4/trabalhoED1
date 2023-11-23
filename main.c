@@ -55,7 +55,6 @@ int main() {
       break;
     case '9':
       theEnd();
-      pause();
       exit(1);
     default:
       printf("Opção Inválida!!\n");
