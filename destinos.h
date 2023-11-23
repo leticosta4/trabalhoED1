@@ -23,7 +23,9 @@ void listarLista(Pais *);
 Pais *inserirPaises(Pais *, char *);
 Sitio *inserirCidade(Sitio *, char *);
 void listasEspecificas(Pais *, char);
-void paisMaisVisitado(Pais *pais);
+int paisMaisVisitado(Pais *);
+void cidadeMaisVisitada(Pais *);
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -134,7 +136,7 @@ void listarSemAuxilio(Pais *pais) {
 
     aux = aux->prox;
   }
-  if (fim == 0){
+  if (fim == 0) {
     printf("┌─────────────────────────────────┐\n");
     printf("│Nenhum pais acessado SEM auxilio!│\n");
     printf("└─────────────────────────────────┘\n");
@@ -166,7 +168,7 @@ void listarComAuxilio(Pais *pais) {
     }
     aux = aux->prox;
   }
-  if (fim == 0){
+  if (fim == 0) {
     printf("┌─────────────────────────────────┐\n");
     printf("│Nenhum pais acessado COM auxilio!│\n");
     printf("└─────────────────────────────────┘\n");
@@ -196,10 +198,10 @@ void listarNaoVisitados(Pais *pais) {
       }
       city = city->prox;
     }
-    //printf("\n");
+    // printf("\n");
     aux = aux->prox;
   }
-  if (fim == 0){
+  if (fim == 0) {
     printf("┌────────────────────────────────┐\n");
     printf("│Todos os paises foram visitados!│\n");
     printf("└────────────────────────────────┘\n");
@@ -212,7 +214,7 @@ void listarSoVisitados(Pais *pais) {
   Sitio *city = NULL;
   int cont, fim = 0;
   aux = pais;
-  
+
   while (aux != NULL) {
     cont = 0;
     city = aux->local;
@@ -229,10 +231,10 @@ void listarSoVisitados(Pais *pais) {
       }
       city = city->prox;
     }
-    //printf("\n");
+    // printf("\n");
     aux = aux->prox;
   }
-  if (fim == 0){
+  if (fim == 0) {
     printf("┌─────────────────────┐\n");
     printf("│Sem paises visitados!│\n");
     printf("└─────────────────────┘\n");
@@ -240,12 +242,55 @@ void listarSoVisitados(Pais *pais) {
   }
 }
 
-void paisMaisVisitado(Pais *pais) {
-  Pais *aux = pais, *maiorPais = pais;
+void cidadeMaisVisitada(Pais *pais) {
+  Pais *country = pais;
   Sitio *city = NULL, *maiorCidade = NULL;
-  char nomesPaises[10][50] = {""},
-       nomesCidades[17][50] = {""}; // caso tenha mais de um
-  int cont = 0, cont2 = 0;
+  char nomesCidades[17][50] = {""};
+  int cont = 0;
+  while(country != NULL){
+    city = country->local;
+    if (maiorCidade == NULL) {
+      maiorCidade = city; // p n sobrescrever
+    }
+     while (city != NULL) {
+       if((city->turista1 + city->turista2) >
+           (maiorCidade->turista1 + maiorCidade->turista2)) {
+         memset(nomesCidades, '\0', sizeof(char));
+         printf("%c\n", nomesCidades[0][2]);
+         cont = 0;
+         strcpy(nomesCidades[cont], city->nomeSitio);
+         maiorCidade = city;
+         cont++;
+       } else if (((city->turista1 + city->turista2) > 0) &&
+                  (city->turista1 + city->turista2) ==
+                      (maiorCidade->turista1 +
+                       maiorCidade->turista2)) { // caso seja igual
+         if (cont != 0) {
+           strcpy(nomesCidades[cont], city->nomeSitio);
+         } else {
+           strcpy(nomesCidades[cont], city->nomeSitio);
+           maiorCidade = city;
+         }
+         cont++;
+       }
+       city = city->prox;
+     }
+    country = country -> prox;
+  }
+  //não tem o if generico da condicional pq ela depende do pais p ser chamada
+  printf("\nEstado(s)/Cidade(s) mais visitado/a(s):\n"); // ainda tem que tirar os  espaços vazios que ficam dos outros países
+  for (int i = 0; i < 17; i++) {
+    if (strcmp(nomesCidades[i], "") != 0)
+      printf("%s\n", nomesCidades[i]);
+    }
+    printf("\n"); 
+}
+
+int paisMaisVisitado(Pais *pais) {
+  Pais *aux = pais, *maiorPais = pais;
+  Sitio *city = NULL;//, *maiorCidade = NULL;
+  char nomesPaises[10][50] = {""};//, *nomesCidades[17][50];= {""}; // caso tenha mais de um
+  int cont = 0;//, cont2 = 0;
 
   while (aux != NULL) {
     if (aux->quantTuristas > maiorPais->quantTuristas) {
@@ -264,60 +309,21 @@ void paisMaisVisitado(Pais *pais) {
       }
       cont++;
     }
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////
-    city = aux->local;
-    if (maiorCidade == NULL) {
-      maiorCidade = city; // imp
-    }
-    // printf( "caractere: %c\n", nomesCidades[0][2]);
-
-    while (city != NULL) {
-      if ((city->turista1 + city->turista2) >
-          (maiorCidade->turista1 + maiorCidade->turista2)) {
-        memset(nomesCidades, '\0', sizeof(nomesCidades));
-        printf("%c\n", nomesCidades[0][2]);
-        cont2 = 0;
-        strcpy(nomesCidades[cont2], city->nomeSitio);
-        maiorCidade = city;
-        cont2++;
-        // printf("Soma: %d", city->turista1 + city->turista2);
-      } else if (((city->turista1 + city->turista2) > 0) &&
-                 (city->turista1 + city->turista2) ==
-                     (maiorCidade->turista1 +
-                      maiorCidade->turista2)) { // caso seja igual
-        if (cont2 != 0) {
-          strcpy(nomesCidades[cont2], city->nomeSitio);
-        } else {
-          strcpy(nomesCidades[cont2], city->nomeSitio);
-          maiorCidade = city;
-        }
-        cont2++;
-      }
-      city = city->prox;
-    }
     aux = aux->prox;
   }
-  if(strcmp(nomesPaises[0], "") != 0){
-    printf("País(es) mais visitado(s):\n"); // ainda tem que tirar os espaços
-                                            // vazios que ficam dos outros países
+  if (strcmp(nomesPaises[0], "") != 0) {
+    printf(
+        "País(es) mais visitado(s):\n"); // ainda tem que tirar os espaços vazios que ficam dos outros países
     for (int i = 0; i < 10; i++) {
       if (strcmp(nomesPaises[i], "") != 0)
         printf("%s\n", nomesPaises[i]);
     }
-    printf(
-        "\nEstado(s)/Cidade(s) mais visitado/a(s):\n"); // ainda tem que tirar os
-                                                      // espaços vazios que ficam
-                                                      // dos outros países
-    for (int i = 0; i < 17; i++) {
-      if (strcmp(nomesCidades[i], "") != 0)
-        printf("%s\n", nomesCidades[i]);
-    }
-    printf("\n");
-  }
-  else{
+    return 1;
+  } else {
     printf("┌───────────────────────┐\n");
-    printf("│Nenhum pais cadastrado!│\n");
+    printf("│Nenhum país cadastrado!│\n");
     printf("└───────────────────────┘\n");
     printf("\n");
+    return 0;
   }
 }
