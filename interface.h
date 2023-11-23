@@ -193,25 +193,25 @@ void opcao1Menu() {
 
 void theEnd(){
   usleep(60000);
-  azul();
+  roxo();
   printf("* ▒▒▒▒▒▒▒  ▒▒▒  ▒▒  ▒▒▒▒▒▒▒           ▒▒▒▒▒▒▒▒  ▒▒▒▒      ▒▒▒▒ ▒▒▒▒▒▒▒   *\n");
   usleep(60000);
-  azul();
+  roxo();
   printf("* ▒  ▒  ▒   ▒▒  ▒▒   ▒▒  ▒▒            ▒▒   ▒▒    ▒▒▒▒    ▒▒   ▒▒    ▒▒  *\n");
   usleep(60000);
-  azul();
+  roxo();
   printf("*    ▒      ▒▒  ▒▒   ▒▒                ▒▒         ▒▒  ▒   ▒▒   ▒▒      ▒ *\n");
   usleep(60000);
-  azul();
+  roxo();
   printf("*    ▒      ▒▒▒▒▒▒   ▒▒▒▒              ▒▒▒▒       ▒▒   ▒  ▒▒   ▒▒      ▒ *\n");
   usleep(60000);
-  azul();
+  roxo();
   printf("*    ▒      ▒▒  ▒▒   ▒▒                ▒▒         ▒▒    ▒ ▒▒   ▒▒      ▒ *\n");
   usleep(60000);
-  azul();
+  roxo();
   printf("*    ▒      ▒▒  ▒▒   ▒▒  ▒▒            ▒▒   ▒▒    ▒▒     ▒▒▒   ▒▒    ▒▒  *\n");
   usleep(60000);
-  azul();
+  roxo();
   printf("*   ▒▒▒    ▒▒▒  ▒▒▒  ▒▒▒▒▒▒           ▒▒▒▒▒▒▒▒   ▒▒▒      ▒▒  ▒▒▒▒▒▒▒    *\n");
   usleep(60000);
 }
