@@ -58,7 +58,7 @@ char* arvoreRespostas(Arvore *viagens) {
   do {
     sleep(1);
     system("clear");
-    printf("Responda!\n");
+    printf("Responda! [s/n]\n");
     printf("%s\n", viagens->pergunta);
     scanf(" %c", &resp);
   } while (!erroResposta(resp));
@@ -69,5 +69,4 @@ char* arvoreRespostas(Arvore *viagens) {
     return arvoreRespostas(viagens->sim);
    else 
     return arvoreRespostas(viagens->nao);
-
 }
