@@ -215,5 +215,9 @@ void theEnd(){
   printf("\t*   ▒▒▒    ▒▒▒  ▒▒▒  ▒▒▒▒▒▒           ▒▒▒▒▒▒▒▒   ▒▒▒      ▒▒  ▒▒▒▒▒▒▒    *\n");
   usleep(60000);
   printf("\n");
-  printf("\t\t\t\t\t\t\t\tBOA VIAGEM!!!\n");
+  printf("\t\t\t\t\t\t\t\tBOA VIAGEM!!!\n\n\n");
+  printf("\t\t\t\t\t\t\t\t\tCréditos\n");
+  printf("\t\t\t\t\t\t\t\tAlysson dos Anjos\n");
+  printf("\t\t\t\t\t\t\t\tCainan de Brito\n");
+  printf("\t\t\t\t\t\t\t\tLetícia Almeida");
 }
